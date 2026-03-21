@@ -15,7 +15,7 @@ export default function ProjectsPage() {
         <Section>
             <Container>
                 <div className="max-w-5xl">
-                    <H1 className="mb-4">Projects</H1>
+                    <H1 className="mb-4 font-mono text-accent"><span className="opacity-50">{"> "}</span>ls -la projects/</H1>
                     <Text className="mb-16 max-w-2xl">
                         A selection of technical projects focusing on infrastructure automation, cloud-native scalability, and AI integration.
                     </Text>
@@ -86,7 +86,7 @@ export default function ProjectsPage() {
                                                 {project.techStack.map((tech) => (
                                                     <span
                                                         key={tech}
-                                                        className="px-3 py-1 bg-background border border-border rounded-md text-xs font-medium text-foreground"
+                                                        className="px-3 py-1 bg-background/50 border border-border/50 rounded-md text-xs font-mono text-accent"
                                                     >
                                                         {tech}
                                                     </span>

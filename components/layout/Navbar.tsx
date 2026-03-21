@@ -13,17 +13,18 @@ export default function Navbar() {
     return (
         <nav className="py-8 sticky top-0 bg-background/80 backdrop-blur-md z-50">
             <Container className="flex items-center justify-between">
-                <Link href="/" className="font-bold text-xl tracking-tighter">
-                    {siteConfig.name.split(" ")[0].toUpperCase()}
+                <Link href="/" className="font-bold text-lg tracking-tight flex items-center gap-2 group">
+                    <span className="text-accent font-mono">{">_"}</span>
+                    <span className="group-hover:text-accent transition-colors font-mono">{siteConfig.name.split(" ")[0].toLowerCase()}</span>
                 </Link>
                 <ul className="flex items-center space-x-8">
                     {navLinks.map((link) => (
                         <li key={link.href}>
                             <Link
                                 href={link.href}
-                                className="text-sm font-medium text-secondary hover:text-foreground transition-colors"
+                                className="text-sm font-mono text-secondary hover:text-accent transition-colors before:content-['./'] before:text-secondary/50 hover:before:text-accent/50"
                             >
-                                {link.label}
+                                {link.label.toLowerCase()}
                             </Link>
                         </li>
                     ))}

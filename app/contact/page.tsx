@@ -42,7 +42,7 @@ export default function ContactPage() {
         <Section className="flex items-center">
             <Container>
                 <div className="max-w-4xl">
-                    <H1 className="mb-4">Get in touch</H1>
+                    <H1 className="mb-4 font-mono text-accent"><span className="opacity-50">{"> "}</span>ping contact</H1>
                     <Text className="mb-16 max-w-2xl text-xl">
                         Currently open to new opportunities, technical discussions, and collaborative projects. Feel free to reach out via any of the channels below.
                     </Text>
@@ -71,17 +71,22 @@ export default function ContactPage() {
                         ))}
                     </div>
 
-                    <div className="mt-24 p-8 md:p-12 bg-white text-black rounded-3xl flex flex-col md:flex-row items-center justify-between gap-8">
-                        <div>
-                            <h3 className="text-2xl md:text-3xl font-bold mb-2">Need a senior perspective?</h3>
-                            <p className="text-zinc-600 font-medium">Let&apos;s discuss infrastructure, scaling, or technical architecture.</p>
+                    <div className="mt-24 p-8 md:p-12 bg-card border border-border/50 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group">
+                        <div className="relative z-10">
+                            <h3 className="text-2xl md:text-3xl font-bold mb-2 flex items-center gap-3">
+                                <span className="text-accent font-mono">{">_"}</span>
+                                Need a senior perspective?
+                            </h3>
+                            <p className="text-secondary font-mono text-sm mt-4">Let&apos;s discuss infrastructure, scaling, or technical architecture.</p>
                         </div>
                         <a
                             href={`mailto:${siteConfig.links.email}`}
-                            className="w-full md:w-auto px-10 py-4 bg-black text-white font-bold rounded-xl hover:bg-zinc-800 transition-colors text-center"
+                            className="relative z-10 w-full md:w-auto px-10 py-4 bg-accent text-background font-bold rounded-xl hover:bg-accent/90 transition-all text-center tracking-tight font-mono hover:-translate-y-1"
                         >
-                            Start Conversation
+                            ./start_conversation.sh
                         </a>
+                        {/* Decorative background ping */}
+                        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-accent/5 rounded-full blur-3xl group-hover:bg-accent/10 transition-colors pointer-events-none"></div>
                     </div>
                 </div>
             </Container>

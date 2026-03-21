@@ -1,29 +1,31 @@
 @import "tailwindcss";
 
 @theme {
-  --font-inter: "Inter", sans-serif;
-  
-  --color-background: #0a0a0a;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-background: #000000;
   --color-foreground: #ededed;
-  
+
   --color-primary: #ffffff;
   --color-secondary: #a1a1aa;
-  --color-accent: #3b82f6;
-  
-  --color-card: #141414;
+  --color-accent: #10b981;
+
+  --color-card: #0a0a0a;
   --color-border: #262626;
 }
 
 @layer base {
   :root {
-    --background: #0a0a0a;
+    --background: #000000;
     --foreground: #ededed;
   }
 
   body {
     background-color: var(--background);
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
     color: var(--foreground);
-    font-family: var(--font-inter);
+    font-family: var(--font-mono);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

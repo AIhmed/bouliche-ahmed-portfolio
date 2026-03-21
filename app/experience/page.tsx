@@ -14,7 +14,7 @@ export default function ExperiencePage() {
         <Section>
             <Container>
                 <div className="max-w-4xl">
-                    <H1 className="mb-4">Experience</H1>
+                    <H1 className="mb-4 font-mono text-accent"><span className="opacity-50">{"> "}</span>cat experience.log</H1>
                     <Text className="mb-16 max-w-2xl">
                         A track record of building scalable infrastructure, leading engineering teams, and delivering high-performance fullstack applications.
                     </Text>
@@ -26,7 +26,7 @@ export default function ExperiencePage() {
                                 <div className="absolute left-0 top-0 bottom-0 w-px bg-border md:hidden" />
 
                                 <div className="grid md:grid-cols-[200px_1fr] gap-4 md:gap-12">
-                                    <div className="text-sm font-medium text-secondary uppercase tracking-[0.2em]">
+                                    <div className="text-sm font-mono text-secondary uppercase tracking-[0.2em]">
                                         {exp.period}
                                     </div>
                                     <div>
@@ -52,7 +52,7 @@ export default function ExperiencePage() {
                                             {exp.skills.map((skill) => (
                                                 <span
                                                     key={skill}
-                                                    className="px-3 py-1 bg-card border border-border rounded-full text-xs font-medium text-secondary"
+                                                    className="px-3 py-1 bg-card/50 border border-border/50 rounded-full text-xs font-mono text-accent"
                                                 >
                                                     {skill}
                                                 </span>
