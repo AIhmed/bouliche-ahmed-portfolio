@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
 import { siteConfig } from "@/data/site";
@@ -31,12 +32,30 @@ export default function Home() {
                 <span className="text-foreground">./whoami.sh</span>
               </div>
 
-              <div className="text-foreground space-y-3 pl-4 border-l-[3px] border-accent/30 py-2">
-                <p><span className="text-accent mr-2">Name:</span>{siteConfig.name}</p>
-                <p><span className="text-accent mr-2">Role:</span>{siteConfig.title}</p>
-                <p className="text-secondary/90 mt-4 leading-relaxed max-w-2xl">
-                  {siteConfig.description}
-                </p>
+              <div className="text-foreground pl-4 border-l-[3px] border-accent/30 py-2">
+                <div className="flex flex-col-reverse sm:flex-row gap-6 items-start sm:items-center">
+                  <div className="flex-1 space-y-3">
+                    <p><span className="text-accent mr-2">Name:</span>{siteConfig.name}</p>
+                    <p><span className="text-accent mr-2">Role:</span>{siteConfig.title}</p>
+                    <p className="text-secondary/90 mt-4 leading-relaxed max-w-2xl">
+                      {siteConfig.description}
+                    </p>
+                  </div>
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="shrink-0 relative w-24 h-24 sm:w-32 sm:h-32 rounded-lg overflow-hidden border border-border/50 shadow-xl"
+                  >
+                    <Image 
+                      src="/boulicheahmed.png" 
+                      alt={siteConfig.name} 
+                      fill 
+                      className="object-cover"
+                      priority
+                    />
+                  </motion.div>
+                </div>
               </div>
 
               <div className="flex gap-2 text-secondary mt-8">
