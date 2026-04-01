@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import { siteConfig } from "@/data/site";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { getDictionary, Locale } from "@/lib/dictionary";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -35,19 +36,24 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ lang: string }>;
 }>) {
+  const { lang } = await params;
+  const dict = await getDictionary(lang as Locale);
+
   return (
-    <html lang="en" className="dark">
+    <html lang={lang} className="dark">
       <body className={`${jetbrainsMono.variable} font-mono antialiased bg-background text-foreground min-h-screen flex flex-col`}>
-        <Navbar />
+        <Navbar dict={dict} lang={lang} />
         <main className="flex-grow">
           {children}
         </main>
-        <Footer />
+        <Footer dict={dict} />
       </body>
     </html>
   );

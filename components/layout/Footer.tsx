@@ -1,13 +1,14 @@
 import Container from "../ui/Container";
 import { siteConfig } from "@/data/site";
 import { Github, Linkedin, Mail } from "lucide-react";
+import type { Dictionary } from "@/dictionaries/en";
 
-export default function Footer() {
+export default function Footer({ dict }: { dict: Dictionary }) {
     return (
         <footer className="py-12 border-t border-border mt-auto">
             <Container className="flex flex-col md:flex-row items-center justify-between gap-6">
                 <p className="text-sm text-secondary">
-                    © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+                    © {new Date().getFullYear()} {siteConfig.name}. {dict.footer.allRightsReserved}
                 </p>
                 <div className="flex items-center space-x-6">
                     <a

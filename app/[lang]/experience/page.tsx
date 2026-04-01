@@ -2,25 +2,30 @@ import { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
 import { H1, H3, Text } from "@/components/ui/Typography";
-import { experiences } from "@/data/experience";
+import { getDictionary, Locale } from "@/lib/dictionary";
+import { ExternalLink } from "lucide-react";
 
-export const metadata: Metadata = {
-    title: "Experience",
-    description: "Professional experience of Ahmed Bouliche, Fullstack & Cloud Engineer.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+    return {
+        title: "Experience",
+    };
+}
 
-export default function ExperiencePage() {
+export default async function ExperiencePage({ params }: { params: Promise<{ lang: string }> }) {
+    const { lang } = await params;
+    const dict = await getDictionary(lang as Locale);
+    
     return (
         <Section>
             <Container>
                 <div className="max-w-4xl">
-                    <H1 className="mb-4 font-mono text-accent"><span className="opacity-50">{"> "}</span>cat experience.log</H1>
+                    <H1 className="mb-4 font-mono text-accent"><span className="opacity-50">{"> "}</span>{dict.experience.title}</H1>
                     <Text className="mb-16 max-w-2xl">
-                        A track record of building scalable infrastructure, leading engineering teams, and delivering high-performance fullstack applications.
+                        {dict.experience.subtitle}
                     </Text>
 
                     <div className="space-y-20">
-                        {experiences.map((exp, index) => (
+                        {dict.experience.items.map((exp: any, index: number) => (
                             <div key={index} className="relative pl-8 md:pl-0">
                                 {/* Timeline line for mobile */}
                                 <div className="absolute left-0 top-0 bottom-0 w-px bg-border md:hidden" />
@@ -38,7 +43,7 @@ export default function ExperiencePage() {
                                         </div>
 
                                         <ul className="space-y-4 mb-8">
-                                            {exp.description.map((bullet, i) => (
+                                            {exp.description.map((bullet: string, i: number) => (
                                                 <li key={i} className="flex gap-4 group">
                                                     <span className="text-accent shrink-0 mt-1.5">—</span>
                                                     <span className="text-secondary leading-relaxed group-hover:text-foreground transition-colors">
@@ -48,8 +53,8 @@ export default function ExperiencePage() {
                                             ))}
                                         </ul>
 
-                                        <div className="flex flex-wrap gap-2">
-                                            {exp.skills.map((skill) => (
+                                        <div className="flex flex-wrap gap-2 mb-6">
+                                            {exp.skills.map((skill: string) => (
                                                 <span
                                                     key={skill}
                                                     className="px-3 py-1 bg-card/50 border border-border/50 rounded-full text-xs font-mono text-accent"
@@ -58,6 +63,16 @@ export default function ExperiencePage() {
                                                 </span>
                                             ))}
                                         </div>
+                                        
+                                        {exp.referral && (
+                                            <div className="inline-flex items-center gap-2 px-4 py-2 border border-accent/30 rounded-lg bg-accent/5">
+                                                <span className="text-sm text-secondary font-mono mr-2">{dict.experience.referenceLabel}:</span>
+                                                <a href={exp.referral.link} target="_blank" rel="noreferrer" className="text-sm font-semibold text-foreground hover:text-accent transition-colors flex items-center gap-2">
+                                                    {exp.referral.name}
+                                                    <ExternalLink className="w-3.5 h-3.5" />
+                                                </a>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
                             </div>

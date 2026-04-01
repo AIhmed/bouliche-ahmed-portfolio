@@ -2,26 +2,30 @@ import { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
 import { H1, H2, Text } from "@/components/ui/Typography";
-import { projects } from "@/data/projects";
 import { ExternalLink, Layers, ShieldCheck, Zap } from "lucide-react";
+import { getDictionary, Locale } from "@/lib/dictionary";
 
-export const metadata: Metadata = {
-    title: "Projects",
-    description: "Technical projects and architecture summaries by Ahmed Bouliche.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+    return {
+        title: "Projects",
+    };
+}
 
-export default function ProjectsPage() {
+export default async function ProjectsPage({ params }: { params: Promise<{ lang: string }> }) {
+    const { lang } = await params;
+    const dict = await getDictionary(lang as Locale);
+    
     return (
         <Section>
             <Container>
                 <div className="max-w-5xl">
-                    <H1 className="mb-4 font-mono text-accent"><span className="opacity-50">{"> "}</span>ls -la projects/</H1>
+                    <H1 className="mb-4 font-mono text-accent"><span className="opacity-50">{"> "}</span>{dict.projects.title}</H1>
                     <Text className="mb-16 max-w-2xl">
-                        A selection of technical projects focusing on infrastructure automation, cloud-native scalability, and AI integration.
+                        {dict.projects.subtitle}
                     </Text>
 
                     <div className="grid gap-12">
-                        {projects.map((project, index) => (
+                        {dict.projects.items.map((project: any, index: number) => (
                             <div
                                 key={index}
                                 className="group relative bg-card border border-border rounded-2xl p-8 md:p-12 hover:border-accent/40 transition-colors"
@@ -39,7 +43,7 @@ export default function ProjectsPage() {
                                             <div>
                                                 <div className="flex items-center gap-2 mb-3 text-foreground font-semibold">
                                                     <Layers className="w-5 h-5 text-accent" />
-                                                    <span>Architecture Summary</span>
+                                                    <span>{dict.projects.architectureSummary}</span>
                                                 </div>
                                                 <p className="text-secondary leading-relaxed">
                                                     {project.architecture}
@@ -50,10 +54,10 @@ export default function ProjectsPage() {
                                                 <div>
                                                     <div className="flex items-center gap-2 mb-3 text-foreground font-semibold">
                                                         <Zap className="w-5 h-5 text-accent" />
-                                                        <span>Challenges Solved</span>
+                                                        <span>{dict.projects.challengesSolved}</span>
                                                     </div>
                                                     <ul className="space-y-2 text-sm text-secondary">
-                                                        {project.challenges.map((challenge, i) => (
+                                                        {project.challenges.map((challenge: string, i: number) => (
                                                             <li key={i} className="flex gap-2">
                                                                 <span className="text-accent">•</span>
                                                                 {challenge}
@@ -64,10 +68,10 @@ export default function ProjectsPage() {
                                                 <div>
                                                     <div className="flex items-center gap-2 mb-3 text-foreground font-semibold">
                                                         <ShieldCheck className="w-5 h-5 text-accent" />
-                                                        <span>Key Decisions</span>
+                                                        <span>{dict.projects.keyDecisions}</span>
                                                     </div>
                                                     <ul className="space-y-2 text-sm text-secondary">
-                                                        {project.decisions.map((decision, i) => (
+                                                        {project.decisions.map((decision: string, i: number) => (
                                                             <li key={i} className="flex gap-2">
                                                                 <span className="text-accent">•</span>
                                                                 {decision}
@@ -81,9 +85,9 @@ export default function ProjectsPage() {
 
                                     <div className="lg:border-l lg:border-border lg:pl-12 flex flex-col justify-start">
                                         <div className="mb-8">
-                                            <h4 className="text-xs uppercase tracking-widest text-secondary font-bold mb-4">Tech Stack</h4>
+                                            <h4 className="text-xs uppercase tracking-widest text-secondary font-bold mb-4">{dict.projects.techStack}</h4>
                                             <div className="flex flex-wrap gap-2">
-                                                {project.techStack.map((tech) => (
+                                                {project.techStack.map((tech: string) => (
                                                     <span
                                                         key={tech}
                                                         className="px-3 py-1 bg-background/50 border border-border/50 rounded-md text-xs font-mono text-accent"
@@ -96,7 +100,7 @@ export default function ProjectsPage() {
 
                                         <div className="mt-auto">
                                             <button className="flex items-center gap-2 text-sm font-semibold text-accent hover:text-white transition-colors">
-                                                Case Study (Pending)
+                                                {dict.projects.caseStudyPending}
                                                 <ExternalLink className="w-4 h-4" />
                                             </button>
                                         </div>

@@ -4,13 +4,18 @@ import Section from "@/components/ui/Section";
 import { H1, Text } from "@/components/ui/Typography";
 import { siteConfig } from "@/data/site";
 import { Github, Linkedin, Mail, Phone } from "lucide-react";
+import { getDictionary, Locale } from "@/lib/dictionary";
 
-export const metadata: Metadata = {
-    title: "Contact",
-    description: "Get in touch with Ahmed Bouliche for engineering opportunities or collaborations.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+    return {
+        title: "Contact",
+    };
+}
 
-export default function ContactPage() {
+export default async function ContactPage({ params }: { params: Promise<{ lang: string }> }) {
+    const { lang } = await params;
+    const dict = await getDictionary(lang as Locale);
+    
     const contactLinks = [
         {
             label: "Email",
@@ -42,9 +47,9 @@ export default function ContactPage() {
         <Section className="flex items-center">
             <Container>
                 <div className="max-w-4xl">
-                    <H1 className="mb-4 font-mono text-accent"><span className="opacity-50">{"> "}</span>ping contact</H1>
+                    <H1 className="mb-4 font-mono text-accent"><span className="opacity-50">{"> "}</span>{dict.contact.title}</H1>
                     <Text className="mb-16 max-w-2xl text-xl">
-                        Currently open to new opportunities, technical discussions, and collaborative projects. Feel free to reach out via any of the channels below.
+                        {dict.contact.subtitle}
                     </Text>
 
                     <div className="grid sm:grid-cols-2 gap-8">
@@ -75,15 +80,15 @@ export default function ContactPage() {
                         <div className="relative z-10">
                             <h3 className="text-2xl md:text-3xl font-bold mb-2 flex items-center gap-3">
                                 <span className="text-accent font-mono">{">_"}</span>
-                                Need a senior perspective?
+                                {dict.contact.needSeniorPerspective}
                             </h3>
-                            <p className="text-secondary font-mono text-sm mt-4">Let&apos;s discuss infrastructure, scaling, or technical architecture.</p>
+                            <p className="text-secondary font-mono text-sm mt-4">{dict.contact.discussText}</p>
                         </div>
                         <a
                             href={`mailto:${siteConfig.links.email}`}
                             className="relative z-10 w-full md:w-auto px-10 py-4 bg-accent text-background font-bold rounded-xl hover:bg-accent/90 transition-all text-center tracking-tight font-mono hover:-translate-y-1"
                         >
-                            ./start_conversation.sh
+                            {dict.contact.startConversation}
                         </a>
                         {/* Decorative background ping */}
                         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-64 bg-accent/5 rounded-full blur-3xl group-hover:bg-accent/10 transition-colors pointer-events-none"></div>
